@@ -13,8 +13,8 @@ create table clients (
     business_tell text not null,
     cell text not null,
     status text not null,
-
 	foreign key (category_id) references categories(id)
+    insert into 
 );
 
 alter table categories add constraint uniq_desc_constraint unique(description);
