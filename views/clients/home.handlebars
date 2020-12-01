@@ -1,0 +1,57 @@
+<h1>clients</h1>
+
+<a href="/clients/add">Add</a>
+
+<table>
+  <tr>
+    <th>contact_details</th>
+    <th>province_id</th>
+    <th>branch</th>
+    <th>email_address</th>
+    <th>postal_code</th>
+    <th>business_tell</th>
+    <th>cell</th>
+    <th>status</th>
+    <th></th>
+  </tr>
+  {{#clients}}
+  <tr>
+    <td>
+      {{contact_details}}
+    </td>
+    
+    <td>
+      {{province_id}}
+    </td>
+    <td>
+      {{branch}}
+    </td>
+       <td>
+      {{email_address}}
+    </td>
+    
+    <td>
+      {{postal_code}}
+    </td>
+    <td>
+      {{business_tell}}
+    </td>
+     <td>
+      {{cell}}
+    </td>
+     <td>
+      {{status}}
+    </td>
+    
+    
+    <td>
+      <a href="/clients/edit/{{id}}">Edit</a>
+      <a href="/clients/delete/{{id}}">Delete</a>
+    </td>
+    {{/clients}}
+  </tr>
+</table>
+
+{{#no_clients}}
+<p>No products available yet. Add some above.</p>
+{{/no_clients}}
