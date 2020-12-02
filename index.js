@@ -95,3 +95,8 @@ var portNumber = process.env.PORT || 3000;
 app.listen(portNumber, function () {
     console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
 });
+
+// let PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+console.log("App started on Port", PORT);
+}); 
