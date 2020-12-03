@@ -3,7 +3,7 @@ const clientService = require('../services/client-service');
 // const ClientService = require('../services/client-service');
 const provinces = require('./province');
 
-module.exports = function(productclientService, provinceService) {
+module.exports = function(clientService, provinceService) {
 	
 	async function show(req, res, next) {
 		try {
