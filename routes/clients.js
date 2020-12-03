@@ -62,7 +62,7 @@ module.exports = function(clientService, provinceService) {
 			let client = await clientService.get(id);
 			// check which item is selected to make the dropdown work
 			provinces = provinces.map(function (province) {
-				province.selected = province.id === client.category_id ? "selected" : "province";
+				province.selected = province.id === client.category_id ? "selected" : "";
 				return province;
 			});
 

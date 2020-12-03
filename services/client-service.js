@@ -22,9 +22,9 @@ module.exports = function C(pool){
                     values ($1, $2, $3,$4, $5, $6,$7, $8)`, data);
     }
     async function get(id){
-        let productResult = await pool.query('SELECT * FROM clients WHERE id = $1', [id]);
+        let clientResult = await pool.query('SELECT * FROM clients WHERE id = $1', [id]);
         let client = clientResult.rows[0];
-        return product;
+        return client;
 
     }
 

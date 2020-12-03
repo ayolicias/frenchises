@@ -5,9 +5,13 @@
 {{#provinces}}
   <h2>{{contact_details}}</h2>
   <a href="/provinces/edit/{{id}}">Edit</a>
-  <a href="/provinces/delete/{{id}}">Delete</a>
+  <a href="/provinces/active/{{id}}">active</a>
+    <a href="/provinces/inactive/{{id}}">inactive</a>
+    <a href="/provinces/pending/{{id}}">pending</a>
+    <a href="/provinces/cancelled/{{id}}">cancelled</a>
+
 {{/provinces}}
 
 {{#no_clients}}
-  <p>No products available yet. Add some above.</p>
+  <p>edit clients above.</p>
 {{/no_clients}}
