@@ -3,17 +3,21 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
-const Provinces = require('./routes/provinces');
-const ProvincesAPI = require('./api/provinces-api');
+const Provinces = require('./routes/province');
+const ProvinceAPI = require('./api/province-api');
 const Clients = require('./routes/clients');
-const ClientsAPI = require('./api/clients-api');
+const ClientAPI = require('./api/client-api');
 
 const app = express();
 const session = require('express-session');
 const flash = require('express-flash');
 const ProvinceService = require('./services/province-service');
-const ClientsService = require('./services/clients-service');
-const pg = require("pg");
+const ClientService = require('./services/client-service');
+
+
+
+const pg = require('pg');
+const provinceApi = require('./api/province-api');
 const Pool = pg.Pool;
 
 // should we use a SSL connection
@@ -23,7 +27,7 @@ if (process.env.DATABASE_URL && !local){
     useSSL = true;
 }
 // which db connection to use
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/my_clients';
+const connectionString = process.env.DATABASE_URL || 'postgresql://ziyanda:pg123@localhost:5432/frenchises_dbsite';
 
 const pool = new Pool({
     connectionString,
@@ -33,9 +37,9 @@ const pool = new Pool({
 const provinceService = ProvinceService(pool);
 const clientService = ClientService(pool);
 const provinceRoutes = Provinces(provinceService);
-const provinceAPI = CategoriesAPI(provinceService);
+const provinceAPI = ProvinceAPI(provinceService);
 const clientRoutes = Clients(clientService, provinceService);
-const clientsAPI = clientsAPI(clientService);
+const clientAPI = ClientAPI(clientService);
 
 app.use(session({
   secret: 'keyboard cat',
@@ -79,24 +83,30 @@ app.post('/clients/update/:id', clientRoutes.update);
 app.get('/clients/add', clientRoutes.showAdd);
 app.post('/clients/add', clientRoutes.add);
 //delete
-app.get('/clients/delete/:id', clientRoutes.delete);
+// app.get('/client/delete/:id', clientRoutes.delete);
 
-app.get('/api/clients',clientsAPI.all);
-app.post('/api/clients',clientsclientsAPI.add);
+app.get('/api/client', clientAPI.all);
+app.post('/api/client', clientAPI.add);
 
 app.get('/api/provinces', provinceAPI.all);
 
 app.use(errorHandler);
 
 //configure the port number using and environment number
-var portNumber = process.env.PORT || 3000;
+// var portNumber = process.env.PORT || 3000;
 
-//start everything up
-app.listen(portNumber, function () {
-    console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
-});
+// //start everything up
+
+// app.listen(portNumber, function () {
+//     console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
+// });
 
 // let PORT = process.env.PORT || 3000;
-app.listen(PORT, function () {
-console.log("App started on Port", PORT);
-}); 
+// app.listen(PORT, function () {
+// console.log("App started on Port", PORT);
+// }); 
+
+app.set('port', (process.env.PORT || 3000));
+app.listen(app.get('port'), function() {
+    console.log('Server started on port '+app.get('port'));
+});

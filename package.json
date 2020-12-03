@@ -1,28 +1,30 @@
 {
-    "name": "frenchises",
-    "version": "0.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-      "test": "nyc --reporter=html --reporter=text mocha",
-      "start": "node index.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "body-parser": "^1.9.2",
-      "express": "^4.10.2",
-      "express-flash": "0.0.2",
-      "express-handlebars": "^3.0.0",
-      "express-myconnection": "^1.0.4",
-      "express-session": "^1.15.6",
-      "mysql": "^2.5.3",
-      "pg": "^7.4.3",
-      "prompt": "^0.2.14"
-    },
-    "devDependencies": {
-      "mocha": "^5.2.0",
-      "nyc": "^12.0.2"
-    }
-  }
-  
+  "name": "c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-flash": "git://github.com/RGBboy/express-flash.git",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayolicias/frenchises.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayolicias/frenchises/issues"
+  },
+  "homepage": "https://github.com/ayolicias/frenchises#readme"
+}

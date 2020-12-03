@@ -1,6 +1,7 @@
+const { text } = require('express');
 const clientService = require('../services/client-service');
-const ClientService = require('../services/client-service');
-const province = require('./province');
+// const ClientService = require('../services/client-service');
+const provinces = require('./province');
 
 module.exports = function(productclientService, provinceService) {
 	
@@ -20,7 +21,7 @@ module.exports = function(productclientService, provinceService) {
 	async function showAdd(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('clients/add', {
+			res.render('client/add', {
 				provinces: provinces,
 			});
 		}
@@ -53,15 +54,15 @@ module.exports = function(productclientService, provinceService) {
 		}
 	};
 
+	
 	async function get(req, res, next) {
 		try {
 			let id = req.params.id;
 			let provinces = await provinceService.all();
 			let client = await clientService.get(id);
-
 			// check which item is selected to make the dropdown work
-			provinces = provinces.map(function (provinces) {
-				province.selected = province.id === client.province_id ? "selected" : "provinces";
+			provinces = provinces.map(function (province) {
+				province.selected = province.id === client.category_id ? "selected" : "province";
 				return province;
 			});
 
@@ -74,27 +75,26 @@ module.exports = function(productclientService, provinceService) {
 			next(err);
 		}
 	};
-
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
-				category_id: Number(req.body.category_id),
-				contact_details: req.body.contact_details,
-				branch: Text(req.body.branch),
-				email_address:Text(req.body.email_address),
-				postal_code:Text(req.body.postal_code),
-				busines_tel:Text(req.body.busines_tel),
-				cell:Text(req.body.cell),
-				status:Text(req.body.status),
-				id: req.params.id
+				province_id: Number(req.body.category_id),
+				contact_details : req.body.contact_details,
+                branch: Text(req.body.price),
+                email_address: Text(req.body.contact_details),
+                postal_code: Text(req.body.postal_code),
+                busines_tel : Text(req.body.busines_tel),
+                cell: Text(req.body.cell),
+				status: Text(req.body)
 			});
-			req.flash('info', 'client updated!')
-			res.redirect('/clients');
+			req.flash('info', 'Client updated!')
+			res.redirect('/client');
 		}
 		catch(err){
 			next(err.stack);
 		}
 	};
+
 
 	async function deleteClients (req, res, next) {
 		try{
@@ -116,5 +116,6 @@ module.exports = function(productclientService, provinceService) {
 		get,
 		delete : deleteClients,
 		update
+		
 	}
 }
