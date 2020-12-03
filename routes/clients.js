@@ -34,7 +34,7 @@ module.exports = function(clientService, provinceService) {
 
 		try {
 			await clientService.create({
-				province_id: Number(req.body.category_id),
+				province_id: Text(req.body.category_id),
 				contact_details : req.body.contact_details,
                 branch: Text(req.body.price),
                 email_address: Text(req.body.contact_details),
@@ -78,7 +78,7 @@ module.exports = function(clientService, provinceService) {
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
-				province_id: Number(req.body.category_id),
+				province_id: Text(req.body.category_id),
 				contact_details : req.body.contact_details,
                 branch: Text(req.body.price),
                 email_address: Text(req.body.contact_details),

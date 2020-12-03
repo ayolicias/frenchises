@@ -92,21 +92,21 @@ app.get('/api/provinces', provinceAPI.all);
 
 app.use(errorHandler);
 
-//configure the port number using and environment number
+// configure the port number using and environment number
 // var portNumber = process.env.PORT || 3000;
 
-// //start everything up
+//start everything up
 
-// app.listen(portNumber, function () {
-//     console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
-// });
-
-// let PORT = process.env.PORT || 3000;
-// app.listen(PORT, function () {
-// console.log("App started on Port", PORT);
-// }); 
-
-app.set('port', (process.env.PORT || 3000));
-app.listen(app.get('port'), function() {
-    console.log('Server started on port '+app.get('port'));
+app.listen(portNumber, function () {
+    console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
 });
+
+let PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+console.log("App started on Port", PORT);
+}); 
+
+// app.set('port', (process.env.PORT || 3000));
+// app.listen(app.get('port'), function() {
+//     console.log('Server started on port '+app.get('port'));
+// });
