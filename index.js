@@ -93,12 +93,12 @@ app.get('/api/provinces', provinceAPI.all);
 app.use(errorHandler);
 
 // configure the port number using and environment number
-// var portNumber = process.env.PORT || 3000;
+var portNumber = process.env.PORT || 3000;
 
 //start everything up
 
 app.listen(portNumber, function () {
-    console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
+  console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
 });
 
 let PORT = process.env.PORT || 3000;
