@@ -8,7 +8,7 @@ create table provinces(
     business_tell text not null,
     cell text not null,
     status text not null,
-	foreign key (province_id) references provinces(id)
+	foreign key (contact_details) references contact_details(id)
 );
 
 create table client (
@@ -20,7 +20,7 @@ create table client (
     business_tell text not null,
     cell text not null,
     status text not null,
-	foreign key (province_id) references provinces(id)
+	foreign key (contact_details) references contact_details(id)
 );
 
 insert into provinces (contact_details,branch,email_address,postal_code,business_tell,cell,status)values 
