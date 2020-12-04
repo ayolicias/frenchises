@@ -1,5 +1,6 @@
 
 create table provinces(
+    id serial not null primary key,
     contact_details text not null,
 	branch text not null,
     email_address text not null,
