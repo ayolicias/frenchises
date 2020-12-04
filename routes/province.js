@@ -73,7 +73,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 			var id = req.params.id;
 			let result = await provinceService.get(id); // pool.query('SELECT * FROM provinces WHERE id = $1', [id]);
 			res.render('client/edit', {
-				page_title: "Edit Customers - Node.js",
+				page_title: "Edit clients - Node.js",
 				data: result
 			});
 		}
@@ -97,7 +97,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 				contact_details
 			})
 			req.flash('info', 'Province updated!');
-			res.redirect('/provincs');
+			res.redirect('/provinces');
 		}
 		catch (err) {
 			next(err);

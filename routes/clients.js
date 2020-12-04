@@ -21,7 +21,7 @@ module.exports = function(clientService, provinceService) {
 	async function showAdd(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('clients/add', {
+			res.render('client/add', {
 				provinces: provinces,
 			});
 		}
@@ -63,7 +63,7 @@ module.exports = function(clientService, provinceService) {
 				return province;
 			});
 
-			res.render('clients/edit', {
+			res.render('client/edit', {
 				provinces: provinces,
 				data: client
 			});

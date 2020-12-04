@@ -1,11 +1,11 @@
 <h1>clients</h1>
 
-<a href="/clients/add">Add</a>
+<a href="/client/add">Add</a>
 
 <table>
   <tr>
     <th>contact_details</th>
-    <th>province_id</th>
+    <th>branch</th>
     <th>branch</th>
     <th>email_address</th>
     <th>postal_code</th>
@@ -14,44 +14,43 @@
     <th>status</th>
     <th></th>
   </tr>
-  {{#clients}}
+  {{#client}}
   <tr>
     <td>
       {{contact_details}}
     </td>
     
     <td>
-      {{province_id}}
-    </td>
-    <td>
       {{branch}}
     </td>
-       <td>
+    <td>
       {{email_address}}
+    </td>
+       <td>
+      {{postal_code}}
     </td>
     
     <td>
-      {{postal_code}}
-    </td>
-    <td>
       {{business_tell}}
     </td>
-     <td>
+    <td>
       {{cell}}
     </td>
      <td>
       {{status}}
     </td>
-    
-    
     <td>
-      <a href="/clients/edit/{{id}}">Edit</a>
-      <a href="/clients/delete/{{id}}">Delete</a>
+      <a href="/client/edit/{{id}}">Edit</a>
+      <a href="/client/delete/{{id}}">Delete</a>
+      <a href="/client/edit/{{id}}">Active</a>
+      <a href="/client/delete/{{id}}">inactive</a>
+      <a href="/client/edit/{{id}}">pending</a>
+      <a href="/client/delete/{{id}}">cancelled</a>
     </td>
-    {{/clients}}
+    {{/client}}
   </tr>
 </table>
 
-{{#no_clients}}
-<p>No products available yet. Add some above.</p>
-{{/no_clients}}
+{{#no_client}}
+<p>add clients above.</p>
+{{/no_client}}
