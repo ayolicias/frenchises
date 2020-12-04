@@ -42,7 +42,6 @@ module.exports = function(clientService, provinceService) {
                 busines_tel : Text(req.body.busines_tel),
                 cell: Text(req.body.cell),
 				status: Text(req.body)
-				
 			});
 			
 			req.flash('info', 'client added!'),
@@ -78,7 +77,7 @@ module.exports = function(clientService, provinceService) {
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
-				province_id: Text(req.body.province_id),
+				// province_id: Text(req.body.province_id),
 				contact_details : req.body.contact_details,
                 branch: Text(req.body.branch),
                 email_address: Text(req.body.contact_details),

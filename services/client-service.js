@@ -39,7 +39,8 @@ module.exports = function C(pool){
         ];
         
         let updateQuery = `UPDATE client
-            SET province_id = $1, 
+            SET 
+                province_id = $1, 
                 contact_details = $2, 
                 branch = $3 
                 email_address = $4, 

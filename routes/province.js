@@ -4,7 +4,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 		try {
 			let provinces = await provinceService.all();
 			res.render('provinces/home', {
-				no_clients: provinces === 0,
+				no_client: provinces === 0,
 				provinces,
 			});
 		}
@@ -19,12 +19,39 @@ module.exports = function ProvinceRoutes(provinceService) {
 
 	async function add(req, res, next) {
 		const {contact_details} = req.body;
+		const{branch} = req.body;
+		const{}
 		try {
 			
 			if (!contact_details) {
-				req.flash('error', 'Province is empty!');
-				return res.redirect('/provinces/add');
+				req.flash('error', 'details is empty!');
+				return res.redirect('/details/add');
 			}
+			if (!branch) {
+				req.flash('error', 'details is empty!');
+				return res.redirect('/details/add');
+			}
+			if (!email_address) {
+				req.flash('error', 'details is empty!');
+				return res.redirect('/details/add');
+			}
+			if (!postal_code) {
+				req.flash('error', 'details is empty!');
+				return res.redirect('/details/add');
+			}
+			if (!business_tell) {
+				req.flash('error', 'details is empty!');
+				return res.redirect('/details/add');
+			}
+		
+		if (!cell) {
+			req.flash('error', 'details is empty!');
+			return res.redirect('/details/add');
+		}
+		if (!status) {
+			req.flash('error', 'details is empty!');
+			return res.redirect('/details/add');
+		}
 
 			await provinceService.add(contact_details);
 			req.flash('info', 'province added!');
