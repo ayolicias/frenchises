@@ -3,7 +3,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 	async function show(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('provinces/home', {
+			res.render('client/home', {
 				no_client: provinces === 0,
 				provinces,
 			});
@@ -14,7 +14,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 	};
 
 	function showAdd(req, res, next) {
-		res.render('provinces/add');
+		res.render('client/add');
 	}
 
 	async function add(req, res, next) {
@@ -54,14 +54,14 @@ module.exports = function ProvinceRoutes(provinceService) {
 		}
 
 			await provinceService.add(contact_details);
-			req.flash('info', 'province added!');
-			res.redirect('/provinces');
+			req.flash('info', 'client added!');
+			res.redirect('/client');
 		}
 		catch (err) {
 
 			if (err.stack.includes("duplicate key")){
-				req.flash('error', 'province already exists : ' + contact_details);
-				return res.redirect('/provinces/add');
+				req.flash('error', 'client already exists : ' + contact_details);
+				return res.redirect('/client/add');
 			}
 
 			next(err)
@@ -71,8 +71,8 @@ module.exports = function ProvinceRoutes(provinceService) {
 	async function get(req, res, next) {
 		try {
 			var id = req.params.id;
-			let result = await provinceService.get(id); // pool.query('SELECT * FROM categories WHERE id = $1', [id]);
-			res.render('provinces/edit', {
+			let result = await provinceService.get(id); // pool.query('SELECT * FROM provinces WHERE id = $1', [id]);
+			res.render('client/edit', {
 				page_title: "Edit Customers - Node.js",
 				data: result
 			});

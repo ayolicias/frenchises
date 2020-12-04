@@ -1,6 +1,6 @@
 const { text } = require('express');
 const clientService = require('../services/client-service');
-const ClientService = require('../services/client-service');
+// const ClientService = require('../services/client-service');
 const provinces = require('./province');
 
 module.exports = function(clientService, provinceService) {
@@ -21,7 +21,7 @@ module.exports = function(clientService, provinceService) {
 	async function showAdd(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('client/add', {
+			res.render('clients/add', {
 				provinces: provinces,
 			});
 		}
@@ -29,25 +29,23 @@ module.exports = function(clientService, provinceService) {
 			next(err);
 		}
 	};
-
 	async function add(req, res, next) {
 
 		try {
 			await clientService.create({
-				province_id: Text(req.body.category_id),
-				contact_details : req.body.contact_details,
-                branch: Text(req.body.price),
-                email_address: Text(req.body.contact_details),
-                postal_code: Text(req.body.postal_code),
-                busines_tel : Text(req.body.busines_tel),
-                cell: Text(req.body.cell),
-				status: Text(req.body)
+				province_id:req.body.province_id,
+				contact_details :eq.body.contact_details,
+				branch:req.body.branch,
+				email_address:req.body.email_address,
+				postal_code: req.body.postal_code,
+				business_tell: req.body.busines_tell,
+				cell: req.body.cell,
+				status: req.body.status,	
 			});
 			
-			req.flash('info', 'client added!'),
+			req.flash('info', 'Client added!')
 			res.redirect('/clients');
 		}
-	
 		catch (err) {
 			next(err);
 		}
@@ -61,7 +59,7 @@ module.exports = function(clientService, provinceService) {
 			let client = await clientService.get(id);
 			// check which item is selected to make the dropdown work
 			provinces = provinces.map(function (province) {
-				province.selected = province.id === client.province_id	 ? "selected" : "";
+			province.selected = province.id === client.province_id	 ? "selected" : "";
 				return province;
 			});
 
@@ -77,14 +75,14 @@ module.exports = function(clientService, provinceService) {
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
-				// province_id: Text(req.body.province_id),
-				contact_details : req.body.contact_details,
-                branch: Text(req.body.branch),
-                email_address: Text(req.body.contact_details),
-                postal_code: Text(req.body.postal_code),
-                busines_tel : Text(req.body.busines_tel),
-                cell: Text(req.body.cell),
-				status: Text(req.body)
+					province_id:req.body.province_id,
+					contact_details :eq.body.contact_details,
+					branch:req.body.branch,
+					email_address:req.body.email_address,
+					postal_code: req.body.postal_code,
+					business_tell: req.body.busines_tell,
+					cell: req.body.cell,
+					status: req.body.status,
 			});
 			req.flash('info', 'Client updated!')
 			res.redirect('/client');
