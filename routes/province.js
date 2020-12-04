@@ -48,11 +48,33 @@ module.exports = function ProvinceRoutes(provinceService) {
 			req.flash('error', 'details is empty!');
 			return res.redirect('/details/add');
 		}
-		if (!status) {
+		// if (!status) {
+		// 	req.flash('error', 'details is empty!');
+		// 	return res.redirect('/details/add');
+		// }
+		if(!status){
 			req.flash('error', 'details is empty!');
-			return res.redirect('/details/add');
+			return res.redirect('/details/active');
+		}
+		if (!status){
+			req.flash('error', 'details is empty!');
+			return res.redirect('/details/inactive');
+		}
+		if(!status){
+			req.flash('error', 'details is empty');
+			return res.redirect('/details/pending');
+		}
+		if(!status){
+			req.flash('error','details is empty');
+			return res.redirect('/details/cancelled');
 		}
 
+		else if(isActive === 0){
+			req.flash("details",'client is Active');
+			res.redirect('/');
+		}
+
+		if(!status)
 			await provinceService.add(contact_details);
 			req.flash('info', 'client added!');
 			res.redirect('/client');
