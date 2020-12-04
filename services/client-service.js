@@ -1,14 +1,12 @@
 module.exports = function C(pool){
     async function all(){
-        const query = `select p.id, p.contact_details, p.branch, c.id as province_id, 
-            c.contact_details as province_details from clients p
-            join provinces c on c.id = p.province_id`;
+        const query = (`select * from client(client_id,contact_details,branch,email_address,postal_code,business_tell,cell,status)values ($1, $2, $3,$4, $5, $6,$7, $8)`, data);
         let results = await pool.query(query);
         return results.rows;
     }
     async function create(client){
         let data = [
-            client.province_id,
+            // client.province_id,
             client.contact_details,
             client.branch,
             client.email_address,
@@ -18,11 +16,10 @@ module.exports = function C(pool){
             client.status
 
         ];
-        return pool.query(`insert into clients(clients_id, contact_details, branch,email_address,postal_code,business_tell,cell,status) 
-                    values ($1, $2, $3,$4, $5, $6,$7, $8)`, data);
+        return pool.query(`insert into client (client_id,contact_details,branch,email_address,postal_code,business_tell,cell,status)values ($1, $2, $3,$4, $5, $6,$7, $8)`, data);
     }
     async function get(id){
-        let clientResult = await pool.query('SELECT * FROM clients WHERE id = $1', [id]);
+        let clientResult = await pool.query('SELECT * FROM client WHERE id = $1', [id]);
         let client = clientResult.rows[0];
         return client;
 
@@ -41,7 +38,7 @@ module.exports = function C(pool){
             client.id
         ];
         
-        let updateQuery = `UPDATE clients 
+        let updateQuery = `UPDATE client
             SET province_id = $1, 
                 contact_details = $2, 
                 branch = $3 

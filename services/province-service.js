@@ -21,8 +21,8 @@ module.exports = function ProvinceService(pool){
         return null;
     }
 
-    async function update(category){
-        return pool.query('UPDATE categories SET contact_details = $1 WHERE id = $2', [category.contact_details, province.id]);
+    async function update(clients){
+        return pool.query('UPDATE clients SET contact_details = $1 WHERE id = $2', [provinces.contact_details, province.id]);
     }
 
     async function deleteOne (id){

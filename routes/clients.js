@@ -1,6 +1,6 @@
 const { text } = require('express');
 const clientService = require('../services/client-service');
-// const ClientService = require('../services/client-service');
+const ClientService = require('../services/client-service');
 const provinces = require('./province');
 
 module.exports = function(clientService, provinceService) {
@@ -62,7 +62,7 @@ module.exports = function(clientService, provinceService) {
 			let client = await clientService.get(id);
 			// check which item is selected to make the dropdown work
 			provinces = provinces.map(function (province) {
-				province.selected = province.id === client.category_id ? "selected" : "";
+				province.selected = province.id === client.province_id	 ? "selected" : "";
 				return province;
 			});
 
@@ -78,9 +78,9 @@ module.exports = function(clientService, provinceService) {
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
-				province_id: Text(req.body.category_id),
+				province_id: Text(req.body.province_id),
 				contact_details : req.body.contact_details,
-                branch: Text(req.body.price),
+                branch: Text(req.body.branch),
                 email_address: Text(req.body.contact_details),
                 postal_code: Text(req.body.postal_code),
                 busines_tel : Text(req.body.busines_tel),
@@ -101,7 +101,7 @@ module.exports = function(clientService, provinceService) {
 			var id = req.params.id;
 			// await pool.query('DELETE FROM clients WHERE id = $1', [id]);
 			await clientService.delete(id);
-			req.flash('info', 'Client deleted!')
+			req.flash('info','Client deleted!')
 			res.redirect('/client');
 		}
 		catch(err){
