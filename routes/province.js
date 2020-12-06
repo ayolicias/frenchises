@@ -1,11 +1,9 @@
-const provinceService = require("../services/province-service");
-
-module.exports = function provinceRoute(pers) {
+module.exports = function ProvinceRoutes(provinceService) {
 	
 	async function show(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('provinces/home', {
+			res.render('province/home', {
 				no_client: provinces === 0,
 				provinces,
 			});
@@ -16,7 +14,7 @@ module.exports = function provinceRoute(pers) {
 	};
 
 	function showAdd(req, res, next) {
-		res.render('provinces/add');
+		res.render('province/add');
 	}
 
 	async function add(req, res, next) {
