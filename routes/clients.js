@@ -1,16 +1,13 @@
-const { text } = require('express');
-const clientService = require('../services/client-service');
-// const ClientService = require('../services/client-service');
-const provinces = require('./province');
+const ClientService = require('../services/client-service');
 
-module.exports = function(clientService, provinceService) {
+module.exports = function(clientService,provinceService) {
 	
 	async function show(req, res, next) {
 		try {
 			let results = await clientService.all(); 
-			res.render('client/home', {
-				no_clients: results.length === 0,
-				clients: results,
+			res.render('clients/home', {
+				no_client: results.length === 0,
+				client: results,
 			});
 		}
 		catch (err) {
@@ -21,7 +18,7 @@ module.exports = function(clientService, provinceService) {
 	async function showAdd(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('client/add', {
+			res.render('clients/home', {
 				provinces: provinces,
 			});
 		}
@@ -33,8 +30,8 @@ module.exports = function(clientService, provinceService) {
 
 		try {
 			await clientService.create({
-				province_id:req.body.province_id,
-				contact_details :eq.body.contact_details,
+				category_id: Number(req.body.category_id),
+				contact_details :req.body.contact_details,
 				branch:req.body.branch,
 				email_address:req.body.email_address,
 				postal_code: req.body.postal_code,
@@ -43,29 +40,29 @@ module.exports = function(clientService, provinceService) {
 				status: req.body.status,	
 			});
 			
-			req.flash('info', 'Client added!')
-			res.redirect('/clients');
+			req.flash('info','Client dded!')
+			res.redirect('/client');
 		}
 		catch (err) {
 			next(err);
 		}
 	};
 
-	
 	async function get(req, res, next) {
 		try {
 			let id = req.params.id;
 			let provinces = await provinceService.all();
 			let client = await clientService.get(id);
-			// check which item is selected to make the dropdown work
+			// check which province is selected to make the dropdown work
+
 			provinces = provinces.map(function (province) {
-			province.selected = province.id === client.province_id	 ? "selected" : "";
+			province.selected = province.id === client.province_id	 ? "selected" : "Cape Town";
 				return province;
 			});
 
-			res.render('client/edit', {
+			res.render('client/home', {
 				provinces: provinces,
-				data: client
+				data: clients
 			});
 		}
 		catch (err) {

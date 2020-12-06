@@ -1,32 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="/style.css">
-	<script src="app.js"></script>
-</head>
-<body>
-<div id="container">
-	<ul id="nav" class="nav">
-		<li>
-			<a href="/provinces">Provinces</a>
-		</li>
-		<li>
-			<a href="/clients">Clients</a>
-		</li>
-	</ul>
-	
-	<div class="errors">
-  		{{messages.error}}
+
+<h1>Add client</h1>
+
+<form action="/client/add" method="POST">
+	<div class="">
+		<label for="">Provinces</label>
+
+		<select class="" name="province_id">
+			{{#provinces}}
+				<option value="{{id}}">{{contact_details}}</option>
+			{{/provinces}}
+		</select>
 	</div>
 
-	<div class="message">
-  		{{messages.info}}
+	<div>
+		<label for="">contact_details</label>
+		<input type="text" name="contact_details" value="{{contact_details}}">
 	</div>
 
+	<div>
+		<label for="">branch</label>
+		<input type="text" step="any" name="branch" value="{{branch}}">
+	</div>
 
-	{{{body}}}
-</div>
-
-</body>
-</html>
+	<input type="submit">
+</form>

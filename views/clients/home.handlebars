@@ -1,17 +1,25 @@
-<h1>clients</h1>
+<h1>Franchises</h1>
 
 <a href="/client/add">Add</a>
+<a href="/client/update">Update</a>
+
+ <a href="/client/edit/{{id}}">Edit</a>
+<a href="/client/edit/{{id}}">Active</a>
+<a href="/client/delete/{{id}}">inactive</a>
+<a href="/client/edit/{{id}}">pending</a>
+<a href="/client/delete/{{id}}">cancelled</a>
+<a href="/client/delete/{{id}}">Delete</a>
 
 <table>
   <tr>
-    <th>contact_details</th>
-    <th>branch</th>
-    <th>branch</th>
-    <th>email_address</th>
-    <th>postal_code</th>
-    <th>business_tell</th>
-    <th>cell</th>
-    <th>status</th>
+    <th>Contact Details</th>
+    <th>Branch</th>
+    <th>Address</th>
+    <th>Email Address</th>
+    <th>Postal Code</th>
+    <th>Business Tell</th>
+    <th>Cell</th>
+    <th>Status</th>
     <th></th>
   </tr>
   {{#client}}
@@ -22,6 +30,9 @@
     
     <td>
       {{branch}}
+    </td>
+    <td>
+      {{address}}
     </td>
     <td>
       {{email_address}}
@@ -39,14 +50,7 @@
      <td>
       {{status}}
     </td>
-    <td>
-      <a href="/client/edit/{{id}}">Edit</a>
-      <a href="/client/delete/{{id}}">Delete</a>
-      <a href="/client/edit/{{id}}">Active</a>
-      <a href="/client/delete/{{id}}">inactive</a>
-      <a href="/client/edit/{{id}}">pending</a>
-      <a href="/client/delete/{{id}}">cancelled</a>
-    </td>
+
     {{/client}}
   </tr>
 </table>

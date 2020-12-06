@@ -1,9 +1,11 @@
-module.exports = function ProvinceRoutes(provinceService) {
+const provinceService = require("../services/province-service");
+
+module.exports = function provinceRoute(pers) {
 	
 	async function show(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('client/home', {
+			res.render('provinces/home', {
 				no_client: provinces === 0,
 				provinces,
 			});
@@ -14,76 +16,27 @@ module.exports = function ProvinceRoutes(provinceService) {
 	};
 
 	function showAdd(req, res, next) {
-		res.render('client/add');
+		res.render('provinces/add');
 	}
 
 	async function add(req, res, next) {
 		const {contact_details} = req.body;
-		const{branch} = req.body;
-		const{}
 		try {
 			
 			if (!contact_details) {
-				req.flash('error', 'details is empty!');
-				return res.redirect('/details/add');
+				req.flash('error', 'Category is empty!');
+				return res.redirect('/provinces/add');
 			}
-			if (!branch) {
-				req.flash('error', 'details is empty!');
-				return res.redirect('/details/add');
-			}
-			if (!email_address) {
-				req.flash('error', 'details is empty!');
-				return res.redirect('/details/add');
-			}
-			if (!postal_code) {
-				req.flash('error', 'details is empty!');
-				return res.redirect('/details/add');
-			}
-			if (!business_tell) {
-				req.flash('error', 'details is empty!');
-				return res.redirect('/details/add');
-			}
-		
-		if (!cell) {
-			req.flash('error', 'details is empty!');
-			return res.redirect('/details/add');
-		}
-		// if (!status) {
-		// 	req.flash('error', 'details is empty!');
-		// 	return res.redirect('/details/add');
-		// }
-		if(!status){
-			req.flash('error', 'details is empty!');
-			return res.redirect('/details/active');
-		}
-		if (!status){
-			req.flash('error', 'details is empty!');
-			return res.redirect('/details/inactive');
-		}
-		if(!status){
-			req.flash('error', 'details is empty');
-			return res.redirect('/details/pending');
-		}
-		if(!status){
-			req.flash('error','details is empty');
-			return res.redirect('/details/cancelled');
-		}
 
-		else if(isActive === 0){
-			req.flash("details",'client is Active');
-			res.redirect('/');
-		}
-
-		if(!status)
 			await provinceService.add(contact_details);
-			req.flash('info', 'client added!');
-			res.redirect('/client');
+			req.flash('info', 'Province added!');
+			res.redirect('/provinces');
 		}
 		catch (err) {
 
 			if (err.stack.includes("duplicate key")){
-				req.flash('error', 'client already exists : ' + contact_details);
-				return res.redirect('/client/add');
+				req.flash('error', 'Province already exists : ' + contact_details);
+				return res.redirect('/provinces/add');
 			}
 
 			next(err)
@@ -93,9 +46,9 @@ module.exports = function ProvinceRoutes(provinceService) {
 	async function get(req, res, next) {
 		try {
 			var id = req.params.id;
-			let result = await provinceService.get(id); // pool.query('SELECT * FROM provinces WHERE id = $1', [id]);
-			res.render('client/edit', {
-				page_title: "Edit clients - Node.js",
+			let result = await provinceService.get(id); // pool.query('SELECT * FROM categories WHERE id = $1', [id]);
+			res.render('provinces/edit', {
+				page_title: "Edit Customers - Node.js",
 				data: result
 			});
 		}
@@ -116,7 +69,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 
 			await provinceService.update({
 				id,
-				contact_details
+				description
 			})
 			req.flash('info', 'Province updated!');
 			res.redirect('/provinces');
@@ -130,8 +83,8 @@ module.exports = function ProvinceRoutes(provinceService) {
 	async function deleteOne(req, res, next) {
 		var id = req.params.id;
 		try{
-			await pro.delete(id);
-			req.flash('info', 'province deleted!');
+			await provinceService.delete(id);
+			req.flash('info', 'Province deleted!');
 			res.redirect('/province');
 		}
 		catch(err){

@@ -1,11 +1,11 @@
-module.exports = function (provinceService) {
+module.exports = function (franchiseService) {
 	
 	async function all(req, res) {
 		try {
-			let provinces = await provinceService.all();
+			let franchises = await franchiseService.all();
 			res.json({
 				status: 'success',
-				data: provinces
+				data: franchises
 			});
 		}
 		catch (err) {
@@ -19,10 +19,10 @@ module.exports = function (provinceService) {
 	async function add(req, res) {
 		try {
 			let input = req.body;
-			await provinceService.add(input);
+			await franchiseService.add(input);
 			res.json({
 				status: 'success',
-				data: provinces
+				data: franchises
 			});
 		}
 		catch (err) {
@@ -36,7 +36,7 @@ module.exports = function (provinceService) {
 	async function get(req, res) {
 		try {
 			var id = req.params.id;
-			let result = await provinceService.get(id);
+			let result = await franchiseService.get(id);
 			res.json({
 				status: 'success',
 				data: result.rows[0]
@@ -55,9 +55,9 @@ module.exports = function (provinceService) {
 		try {
 			const data = req.body;
 			const id = req.params.id;
-			const details = data.details;
+			const result = data.result;
 
-			await provinceService.update({
+			await franchiseService.update({
 				id,
 				details
 			})
@@ -77,7 +77,7 @@ module.exports = function (provinceService) {
 	async function deleteOne(req, res) {
 		try{
 			const id = req.params.id;
-			await provinceService.delete(id);
+			await franchiseService.delete(id);
 			res.json({
 				status: 'success'
 			});
