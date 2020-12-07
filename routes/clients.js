@@ -31,6 +31,7 @@ module.exports = function(clientService,provinceService) {
 		try {
 			await clientService.create({
 				category_id: Number(req.body.category_id),
+				province_name :req.body.province_name,
 				contact_details :req.body.contact_details,
 				branch:req.body.branch,
 				email_address:req.body.email_address,
@@ -73,6 +74,7 @@ module.exports = function(clientService,provinceService) {
 		try{
 			await clientService.update({
 					province_id:req.body.province_id,
+					province_name :eq.body.province_name,
 					contact_details :eq.body.contact_details,
 					branch:req.body.branch,
 					email_address:req.body.email_address,

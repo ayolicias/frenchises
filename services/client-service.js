@@ -43,16 +43,18 @@ module.exports = function C(pool){
         let updateQuery = `UPDATE client
             SET 
                 province_id = $1, 
-                contact_details = $2, 
-                branch = $3 
-                address = $4
-                email_address = $5, 
-                postal_code = $6,
-                business_tell = $7, 
-                cell = $8
-                status = $9, 
+                province_name $2
+                contact_details = $3, 
+                branch = $4 
+                address = $5
+                email_address = $6, 
+                postal_code = $7,
+                business_tell = $8, 
+                cell = $9,
+                status = $10, 
+
                 
-            WHERE id = $9`;
+            WHERE id = $10`;
 
         return pool.query(updateQuery, data);
     }

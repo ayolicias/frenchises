@@ -23,6 +23,7 @@
         </tr>
         {{#each contactsList}}
         <tr>
+                <td>{{province_name}}</td>
                 <td>{{contact_details}}</td>
                 <td>{{branch}}</td>
                 <td>{{address}}</td>
@@ -64,6 +65,10 @@
                 <div class="errors">
                 </div>
                 <div>
+                    <label for="province_name">province_name</label>
+                    <input type="text" name="province_name" class="province_name" >
+                </div>
+                <div>
                     <label for="contact_details">contact_details</label>
                     <input type="text" name="contact_details" class="contact_details" >
                 </div>
@@ -77,7 +82,7 @@
                     <input type="text" name="branch" id="" class="branch">
                 </div>
                 <div>
-                    <label for="address">email_address</label>
+                    <label for="address"><address></address></label>
                     <input type="text" name="address" id="" class="address">
                 </div>
                 <div>

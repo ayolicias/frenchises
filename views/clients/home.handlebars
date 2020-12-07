@@ -1,17 +1,43 @@
-<h1>Westen Cape Franchises</h1>
+<h1>Franchises</h1>
+<div>
+    <a href="/client/update">Update</a>
+    <a href="/client/add">Add</a>
+    <a href="/client/update">Edit</a>
+    <a href="/client/edit/{{id}}">Delete</a> 
 
-<a href="/client/add">Add</a>
-<a href="/client/update">Update</a>
+  <div class="row select"id="filt">
+    <div class="col-md-12">
+      
+      <select id="Select" name="status" onchange="selectStatus(this.value)">
+        <option name="status" value="all">Status</option>
+        {{#each status}}
+        <option name="status" value="{{initials}}">{{status_id}}</option>
+        {{/each}}  
+      </select>
+      {{!-- <a href="/reset"><button type="button"class="btn btn-danger btn-lg"id="move">RESET</button></a> --}}
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="displayStatus">
+        {{#each clients}}
+         <div class="display">
+          {{client}}
+          </div>
+        {{/each}}
+    </div>
+  </div>
+  </div>
 
- <a href="/client/edit/{{id}}">Edit</a>
-<a href="/client/edit/{{id}}">Active</a>
-<a href="/client/delete/{{id}}">inactive</a>
-<a href="/client/edit/{{id}}">pending</a>
-<a href="/client/delete/{{id}}">cancelled</a>
-<a href="/client/delete/{{id}}">Delete</a>
-
+<script>
+  function selectTown(value) {
+    location.href = '/filter/' + value;
+  }
+</script>
+ 
 <table>
   <tr>
+    <th>province_name</th>
     <th>Contact Details</th>
     <th>Branch</th>
     <th>Address</th>
@@ -19,11 +45,13 @@
     <th>Postal Code</th>
     <th>Business Tell</th>
     <th>Cell</th>
-    <th>Status</th>
     <th></th>
   </tr>
   {{#client}}
   <tr>
+    <td>
+      {{province_name}}
+    </td>
     <td>
       {{contact_details}}
     </td>
@@ -47,10 +75,7 @@
     <td>
       {{cell}}
     </td>
-     <td>
-      {{status}}
-    </td>
-
+     
     {{/client}}
   </tr>
 </table>
