@@ -8,13 +8,18 @@
   <div class="row select"id="filt">
     <div class="col-md-12">
       
-      <select id="Select" name="status" onchange="selectStatus(this.value)">
-        <option name="status" value="all">Status</option>
-        {{#each status}}
-        <option name="status" value="{{initials}}">{{status_id}}</option>
-        {{/each}}  
+      <select id="status_type" class="col-sm-6" name="status" onchange="selectStatus(this.value)">
+        <option name="status" value="Active">Active</option>
+        <option name="status" value="Inactive">Inactive</option>
+        <option name="status" value="Pending">Pending</option>
+        <option name="status" value="Cancelled">Cancelled</option>
       </select>
-      {{!-- <a href="/reset"><button type="button"class="btn btn-danger btn-lg"id="move">RESET</button></a> --}}
+      <span class="col-sm-6">
+        {{!-- <button type="button" class="btn btn-danger btn-lg"id="move">SortRecords</button> --}}
+    <a href="/SortRecords"><button type="button"class="btn btn-danger btn-lg"id="move">SortRecords</button></a>
+
+      </span>
+      
     </div>
   </div>
   
@@ -35,7 +40,7 @@
   }
 </script>
  
-<table>
+<table class="col-lg-12 table table-primary">
   <tr>
     <th>province_name</th>
     <th>Contact Details</th>

@@ -1,3 +1,4 @@
+const { text } = require('express');
 const ClientService = require('../services/client-service');
 
 module.exports = function(clientService,provinceService) {
@@ -18,7 +19,7 @@ module.exports = function(clientService,provinceService) {
 	async function showAdd(req, res, next) {
 		try {
 			let provinces = await provinceService.all();
-			res.render('clients/home', {
+			res.render('clients/home',{
 				provinces: provinces,
 			});
 		}
@@ -41,8 +42,8 @@ module.exports = function(clientService,provinceService) {
 				status: req.body.status,	
 			});
 			
-			req.flash('info','Client dded!')
-			res.redirect('/client');
+			req.flash('info','Client Added!')
+			res.redirect('/clients/add');
 		}
 		catch (err) {
 			next(err);
@@ -57,25 +58,49 @@ module.exports = function(clientService,provinceService) {
 			// check which province is selected to make the dropdown work
 
 			provinces = provinces.map(function (province) {
-			province.selected = province.id === client.province_id	 ? "selected" : "Cape Town";
+			province.selected = province.id === client.province_id	 ? "selected" : "";
 				return province;
 			});
 
-			res.render('client/home', {
+			res.render('clients/get', {
 				provinces: provinces,
-				data: clients
+				data: client
 			});
 		}
 		catch (err) {
 			next(err);
 		}
 	};
+	
+	async function sorts(req, res, next) {
+		try {
+			let status_type = req.params.status_type;
+			let provinces = await provinceService.all();
+			let client = await clientService.sorting(id);
+
+			// check which status is selected to make the dropdown work
+
+			provinces = provinces.map(function (province) {
+			status_type.selected = status_type=== client.status_type	 ? "selected" : "";
+				return province;
+			});
+
+			res.render('clients/home', {
+				provinces: provinces,
+				data: client
+			});
+		}
+		catch (err) {
+			next(err);
+		}
+	};
+
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
 					province_id:req.body.province_id,
-					province_name :eq.body.province_name,
-					contact_details :eq.body.contact_details,
+					province_name :req.body.province_name,
+					contact_details :req.body.contact_details,
 					branch:req.body.branch,
 					email_address:req.body.email_address,
 					postal_code: req.body.postal_code,
@@ -84,7 +109,7 @@ module.exports = function(clientService,provinceService) {
 					status: req.body.status,
 			});
 			req.flash('info', 'Client updated!')
-			res.redirect('/client');
+			res.redirect('/clients/update');
 		}
 		catch(err){
 			next(err.stack);
@@ -105,13 +130,25 @@ module.exports = function(clientService,provinceService) {
 		}
 	};
 
+
+async function sortRecords(req, res) {
+    try{
+        await provinceService.clear();
+        res.redirect('/');
+
+    } catch (err) {
+        res.send(err.stack)
+    }
+}
+
 	return {
 		show,
 		showAdd,
 		add,
 		get,
 		delete : deleteClients,
-		update
-		
+		update,
+		sorts,
+		sortRecords	
 	}
 }

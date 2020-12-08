@@ -26,6 +26,11 @@ module.exports = function C(pool){
         return client;
 
     }
+    async function sort(id){
+        let statusResult =await pool.query('SELECT * FROM client',[id]);
+        let records = statusResult.rows[0];
+        return records;
+    }
 
     async function update(client){
         var data = [
@@ -68,6 +73,7 @@ module.exports = function C(pool){
         create,
         delete: deleteById,
         get,
-        update
+        update,
+        sort
     }
 }

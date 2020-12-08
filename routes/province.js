@@ -22,19 +22,19 @@ module.exports = function ProvinceRoutes(provinceService) {
 		try {
 			
 			if (!contact_details) {
-				req.flash('error', 'Category is empty!');
-				return res.redirect('/provinces/add');
+				req.flash('error', 'details is empty!');
+				return res.redirect('/client/add');
 			}
 
 			await provinceService.add(contact_details);
-			req.flash('info', 'Province added!');
-			res.redirect('/provinces');
+			req.flash('info', 'details added!');
+			res.redirect('/client');
 		}
 		catch (err) {
 
 			if (err.stack.includes("duplicate key")){
-				req.flash('error', 'Province already exists : ' + contact_details);
-				return res.redirect('/provinces/add');
+				req.flash('error', 'details already exists : ' + contact_details);
+				return res.redirect('/client/add');
 			}
 
 			next(err)
@@ -52,6 +52,45 @@ module.exports = function ProvinceRoutes(provinceService) {
 		}
 		catch (err) {
 			next(err);
+		}
+	};
+
+	// async function sorts(req, res, next) {
+	// 	try {
+	// 		var status = req.params.status;
+	// 		let sorting = await provinceService.sort(status); // pool.query('SELECT * FROM categories WHERE id = $1', [id]);
+	// 		res.render('provinces/home', {
+	// 			page_title: "Edit Customers - Node.js",
+	// 			data: sorting
+	// 		});
+	// 	}
+	// 	catch (err) {
+	// 		next(err);
+	// 	}
+	// };
+
+	
+	async function sorts(req, res, next) {
+		const {status_type} = req.body;
+		try {
+			
+			if (!status_type) {
+				req.flash('error', 'status is empty!');
+				return res.redirect('/client/home');
+			}
+
+			await provinceService.sort(status_type);
+			req.flash('info', 'status added!');
+			res.redirect('/client');
+		}
+		catch (err) {
+
+			if (err.stack.includes("duplicate key")){
+				req.flash('error', 'status already exists : ' + status_type);
+				return res.redirect('/client/home');
+			}
+
+			next(err)
 		}
 	};
 
@@ -89,6 +128,10 @@ module.exports = function ProvinceRoutes(provinceService) {
 			next(err);
 		}
 	};
+	async function sortRecords() {
+        let remove = await pool.query('DELETE FROM client');
+        return remove.rows;
+    }
 
 	return {
 		add,
@@ -96,6 +139,8 @@ module.exports = function ProvinceRoutes(provinceService) {
 		update,
 		get,
 		showAdd,
-		show
+		show,
+		sorts,
+		sortRecords
 	}
 }

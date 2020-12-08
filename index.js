@@ -73,22 +73,36 @@ app.get('/provinces/add', provinceRoutes.showAdd);
 app.get('/provinces/edit/:id', provinceRoutes.get);
 app.post('/provinces/update/:id', provinceRoutes.update);
 app.post('/provinces/add', provinceRoutes.add);
+app.post('/province/add', provinceRoutes.add);
+app.post('/province/home', provinceRoutes.sorts);
+app.get('/provinces/home', provinceRoutes.showAdd);
+app.post('/provinces/home', provinceRoutes.sortRecords);
+app.get('/provinces/home', provinceRoutes.showAdd);
+
 //delete
-app.get('/provinces/delete/:id', provinceRoutes.delete);
+app.get('/province/delete/:id', provinceRoutes.delete);
 
 app.get('/', clientRoutes.show);
 app.get('/clients', clientRoutes.show);
-app.get('/clients/edit/:id', clientRoutes.get);
-app.post('/clients/update/:id', clientRoutes.update);
-app.get('/clients/add', clientRoutes.showAdd);
-app.post('/clients/add', clientRoutes.add);
+app.get('/client/edit', clientRoutes.showAdd);
+
+// app.post('/client/edit', clientRoutes.edit);
+app.get('/client/update', clientRoutes.showAdd);
+app.post('/clients/update', clientRoutes.update);
+app.get('/client/add', clientRoutes.showAdd);
+app.post('/client/add', clientRoutes.add);
+app.get('/client/home', clientRoutes.showAdd),
+app.post('/client/home', clientRoutes.sorts),
+app.get('/client/home', clientRoutes.sortRecords),
+app.post('/client/home', clientRoutes.sortRecords),
+
 //delete
 // app.get('/client/delete/:id', clientRoutes.delete);
 
 app.get('/api/client', clientAPI.all);
 app.post('/api/client', clientAPI.add);
 
-app.get('/api/provinces', provinceAPI.all);
+app.get('/api/province', provinceAPI.all);
 
 app.use(errorHandler);
 
@@ -98,7 +112,7 @@ app.use(errorHandler);
 // //start everything up
 
 // app.listen(portNumber, function () {
-//   console.log('Create, Read, Update, and Delete (frenchises) server listening on:', portNumber);
+//   console.log('Create, Read, Update, and Delete (clients) server listening on:', portNumber);
 // });
 
 // let PORT = process.env.PORT || 3000;

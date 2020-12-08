@@ -1,57 +1,10 @@
-{{!-- <h1>Add province</h1>
+<h1>Add Contact_Details</h1>
 
 <form action="/province/add" method="POST">
-	<label for="">Description</label>
-	<input type="text" name="description" value="{{description}}">
+	<label for="">Contact_Details</label>
+	<input type="text" name="province_name" value="{{province_name}}">
 	<input type="submit">
-</form> --}}
+</form>
 
-<!DOCTYPE html>
-<div class="allSections">
-  <div class="header">
-    <h1>ADD PROVINCE</h1>
 
-<form action="/province/add" method="POST">
-    <div class="row sectionOne" id="input">
-      <div class="col-md-12" id="heading">
-       <b>provinces:</</b><input type="text" name="inputName" class="Name"pattern="[A-Z]{2,3}\s\d{3}\W\d{3}"</input>
-
-       </div>
-      </div>  
-  </form>
-   <hr>
-  <div class="row select"id="filt">
-    <div class="col-md-12">
-      
-      <select id="Select" name="province" onchange="selectprovince(this.value)">
-        <option name="towns" value="all">All province</option>
-        {{#each province}}
-        <option name="province" value="{{initials}}">{{province_id}}</option>
-        {{/each}}
-
-      </select>
-
-	  	<input type="submit">
-
-    </div>
-  </div>
   
-  <div class="row">
-    <div class="displayReg">
-        {{#each regs}}
-         <div class="display">
-          {{reg}}
-          </div>
-        {{/each}}
-    </div>
-  </div>
-  <br>
-  
-  
-  </div>
-
-<script>
-  function selectprovince(value) {
-    location.href = '/filter/' + value;
-  }
-</script>
