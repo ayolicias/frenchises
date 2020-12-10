@@ -103,12 +103,22 @@ module.exports = function ProvinceRoutes(provinceService) {
 			let data = req.body;
 			let id = req.params.id;
 			let contact_details = req.body.contact_details;
+			let provinces = req.body.provinces
 
 			await provinceService.update({
-				id,
-				description
+				// id,
+				// description
+				province_id:req.body.province_id,
+				province_name :req.body.province_name,
+				contact_details :req.body.contact_details,
+				branch:req.body.branch,
+				email_address:req.body.email_address,
+				postal_code: req.body.postal_code,
+				business_tell: req.body.busines_tell,
+				cell: req.body.cell,
+				status: req.body.status,
 			})
-			req.flash('info', 'Province updated!');
+			req.flash('info', 'Franchise updated!');
 			res.redirect('/provinces');
 		}
 		catch (err) {

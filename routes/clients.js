@@ -2,6 +2,37 @@ const { text } = require('express');
 const ClientService = require('../services/client-service');
 
 module.exports = function(clientService,provinceService) {
+
+    // async function status(req,res){
+    //     try{
+    //         let type = req.body.status_type;
+    //          let types = await clientService.home()
+    //         let status = await clientService.status_type()
+    //         res.render('home',{type, types,Status})
+    //         }catch(err){
+    //         res.send(err.stack);
+    //     }
+    // }
+   
+async function clearAll(req, res) {
+    try{
+        await client.clear();
+        res.redirect('/');
+
+    } catch (err) {
+        res.send(err.stack)
+    }
+}
+
+async function contacts(type,types){
+    let type = await  findContacts(type);
+    if (types.length == 0) {
+     await insert(tpe,types);
+    }
+     else{
+      await update(type,types, types)
+    }
+  }
 	
 	async function show(req, res, next) {
 		try {
@@ -81,12 +112,16 @@ module.exports = function(clientService,provinceService) {
 			// check which status is selected to make the dropdown work
 
 			provinces = provinces.map(function (province) {
-			status_type.selected = status_type=== client.status_type	 ? "selected" : "";
+			status_type.selected = status_type=== client.status_type? "selected" : "";
 				return province;
 			});
+			let status = ["Active", "Inactive", "Pending", "Cancelled"];
+			status.sort();
+			status.reverse();
+
 
 			res.render('clients/home', {
-				provinces: provinces,
+				client: clientService,
 				data: client
 			});
 		}
@@ -98,7 +133,6 @@ module.exports = function(clientService,provinceService) {
 	async function update(req, res, next) {
 		try{
 			await clientService.update({
-					province_id:req.body.province_id,
 					province_name :req.body.province_name,
 					contact_details :req.body.contact_details,
 					branch:req.body.branch,
@@ -133,7 +167,7 @@ module.exports = function(clientService,provinceService) {
 
 async function sortRecords(req, res) {
     try{
-        await provinceService.clear();
+        await clientService.clear();
         res.redirect('/');
 
     } catch (err) {
@@ -149,6 +183,10 @@ async function sortRecords(req, res) {
 		delete : deleteClients,
 		update,
 		sorts,
-		sortRecords	
+		sortRecords,
+		clearAll,
+		contacts,
+		
+		
 	}
 }

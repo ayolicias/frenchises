@@ -2,8 +2,7 @@
 <div>
     <a href="/client/update">Update</a>
     <a href="/client/add">Add</a>
-    <a href="/client/update">Edit</a>
-    <a href="/client/edit/{{id}}">Delete</a> 
+    <a href="/client/delete/{{id}}">Delete</a> 
 
   <div class="row select"id="filt">
     <div class="col-md-12">
@@ -35,7 +34,7 @@
   </div>
 
 <script>
-  function selectTown(value) {
+  function status_type(value) {
     location.href = '/filter/' + value;
   }
 </script>

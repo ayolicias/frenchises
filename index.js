@@ -14,10 +14,9 @@ const flash = require('express-flash');
 const ProvinceService = require('./services/province-service');
 const ClientService = require('./services/client-service');
 
-
-
 const pg = require('pg');
 const provinceApi = require('./api/province-api');
+const province = require('./routes/province');
 const Pool = pg.Pool;
 
 // should we use a SSL connection
@@ -71,33 +70,37 @@ function errorHandler(err, req, res, next) {
 app.get('/provinces', provinceRoutes.show);
 app.get('/provinces/add', provinceRoutes.showAdd);
 app.get('/provinces/edit/:id', provinceRoutes.get);
-app.post('/provinces/update/:id', provinceRoutes.update);
+app.get('/provinces/home', provinceRoutes.showAdd);
+app.get('/provinces/update/1', provinceRoutes.update);
+
+// app.get('/provinces/home', provinceRoutes.showAdd);
+// app.get('/provinces/home', provinceRoutes.showAdd);
+
+app.post('/provinces/home', provinceRoutes.sortRecords);
+app.post('/province/update', provinceRoutes.update);
 app.post('/provinces/add', provinceRoutes.add);
 app.post('/province/add', provinceRoutes.add);
 app.post('/province/home', provinceRoutes.sorts);
-app.get('/provinces/home', provinceRoutes.showAdd);
-app.post('/provinces/home', provinceRoutes.sortRecords);
-app.get('/provinces/home', provinceRoutes.showAdd);
 
 //delete
-app.get('/province/delete/:id', provinceRoutes.delete);
+app.get('/province/delete', provinceRoutes.delete);
 
 app.get('/', clientRoutes.show);
 app.get('/clients', clientRoutes.show);
 app.get('/client/edit', clientRoutes.showAdd);
 
-// app.post('/client/edit', clientRoutes.edit);
 app.get('/client/update', clientRoutes.showAdd);
-app.post('/clients/update', clientRoutes.update);
 app.get('/client/add', clientRoutes.showAdd);
-app.post('/client/add', clientRoutes.add);
 app.get('/client/home', clientRoutes.showAdd),
-app.post('/client/home', clientRoutes.sorts),
 app.get('/client/home', clientRoutes.sortRecords),
-app.post('/client/home', clientRoutes.sortRecords),
+
+// app.post('/client/home', clientRoutes.sortRecords),
+app.post('/client/home', clientRoutes.sorts),
+app.post('/client/add', clientRoutes.add);
+app.post('/client/update', clientRoutes.update);
 
 //delete
-// app.get('/client/delete/:id', clientRoutes.delete);
+app.get('/client/delete/:id', clientRoutes.delete);
 
 app.get('/api/client', clientAPI.all);
 app.post('/api/client', clientAPI.add);
