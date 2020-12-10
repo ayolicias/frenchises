@@ -3,20 +3,20 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
-const Provinces = require('./routes/province');
+const Provinces = require('./routes/clients');
 const ProvinceAPI = require('./api/province-api');
-const Clients = require('./routes/clients');
+const Clients = require('./routes/province');
 const ClientAPI = require('./api/client-api');
 
 const app = express();
 const session = require('express-session');
 const flash = require('express-flash');
 const ProvinceService = require('./services/province-service');
-const ClientService = require('./services/client-service');
+const ClientService = require('./services/client-servince');
 
 const pg = require('pg');
 const provinceApi = require('./api/province-api');
-const province = require('./routes/province');
+const province = require('./routes/franch');
 const Pool = pg.Pool;
 
 // should we use a SSL connection

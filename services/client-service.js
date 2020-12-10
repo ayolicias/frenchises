@@ -1,4 +1,4 @@
-module.exports = function C(pool){
+module.exports = function ClientService(pool){
     async function all(){
         const query = (`select * from client`);
         let results = await pool.query(query);
