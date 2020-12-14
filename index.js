@@ -73,10 +73,10 @@ app.get('/franch/update/1', franchRoutes.update);
 // app.get('/franchises/home', franchiseRoutes.showAdd);
 // app.get('/franchises/home', franchiseRoutes.showAdd);
 
-app.post('/franch/home', franchRoutes.sortRecords);
+app.post('/franch/home', franchRoutes.show);
 app.post('/franch/update', franchRoutes.update);
 app.post('/franch/add', franchRoutes.add);
-app.post('/franch/home', franchRoutes.sorts);
+app.post('/franch/home', franchRoutes.showAdd);
 
 //delete
 app.get('/franch/delete', franchRoutes.delete);
@@ -86,12 +86,14 @@ app.get('/franchises/home', franchisesRoutes.showAdd);
 
 app.get('/franchises/update', franchisesRoutes.showAdd);
 app.get('/franchises/home', franchisesRoutes.showAdd);
-app.get('/franchises/home', franchisesRoutes.showAdd),
+app.get('/franchises/add', franchisesRoutes.add),
 
 app.post('/franchises/add', franchisesRoutes.add);
 app.post('/franchises/update', franchisesRoutes.update);
 app.post('/franchises/home', franchisesRoutes.show);
 app.post('/franchises/home', franchisesRoutes.showAdd);
+app.post('/franchises/add', franchisesRoutes.showAdd);
+app.post('/franchises/add', franchisesRoutes.show);
 
 //delete
 app.get('/franchises/delete/:id', franchisesRoutes.delete);
@@ -100,8 +102,6 @@ app.get('/api/franchises', franchisesAPI.all);
 app.post('/api/franchises', franchisesAPI.add);
 
 app.post('/api/franchises', franchisesAPI.add);
-
-
 app.get('/api/franch', franchAPI.all);
 
 app.use(errorHandler);

@@ -29,7 +29,7 @@ module.exports = function franchService(pool){
     }
 
     async function update(province){
-        return pool.query('UPDATE provinces SET contact_details = $1 WHERE id = $2', [province.contact_details, province.id]);
+        return pool.query('UPDATE client SET contact_details = $1 WHERE id = $2', [province.contact_details, province.id]);
     }
 
     async function deleteOne (id){

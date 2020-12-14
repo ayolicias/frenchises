@@ -2,29 +2,65 @@
 <h1>Add franchises</h1>
 
 <form action="/franchises/add" method="POST">
-	<div class="">
-		<label for="">Franchises</label>
+	  <div class="row select"id="filt">
+    <div class="col-md-12">
+      
+      <select id="status_type" class="col-sm-6" name="status" onchange="selectStatus(this.value)">
+        <option name="status" value="Active">Active</option>
+        <option name="status" value="Inactive">Inactive</option>
+        <option name="status" value="Pending">Pending</option>
+        <option name="status" value="Cancelled">Cancelled</option>
+      </select>
+      <span class="col-sm-6">
+        {{!-- <button type="button" class="btn btn-danger btn-lg"id="move">SortRecords</button> --}}
+    <a href="/SortRecords"><button type="button"class="btn btn-danger btn-lg"id="move">SortRecords</button></a>
 
-		<select class="" name="province_id">
-			{{#status_type}}
-				<option value="{{id}}">{{status_type}}</option>
-			{{/status_type}}
-		</select>
-	</div>
-	<div>
-		<label for="">province_name</label>
-		<input type="text" name="province_name" value="{{province_name}}">
-	</div>
-
-	<div>
-		<label for="">contact_details</label>
-		<input type="text" name="contact_details" value="{{contact_details}}">
-	</div>
-
-	<div>
-		<label for="">branch</label>
-		<input type="text" step="any" name="branch" value="{{branch}}">
-	</div>
-
-	<input type="submit">
+      </span>
+      
+    </div>
+  </div>
+	<table class="col-lg-12 table table-primary">
+  <tr>
+    <th>province_name</th>
+    <th>Contact Details</th>
+    <th>Branch</th>
+    <th>Address</th>
+    <th>Email Address</th>
+    <th>Postal Code</th>
+    <th>Business Tell</th>
+    <th>Cell</th>
+    <th></th>
+  </tr>
+  {{#client}}
+  <tr>
+    <td>
+      {{province_name}}
+    </td>
+    <td>
+      {{contact_details}}
+    </td>
+    
+    <td>
+      {{branch}}
+    </td>
+    <td>
+      {{address}}
+    </td>
+    <td>
+      {{email_address}}
+    </td>
+       <td>
+      {{postal_code}}
+    </td>
+    
+    <td>
+      {{business_tell}}
+    </td>
+    <td>
+      {{cell}}
+    </td>
+     
+    {{/client}}
+  </tr>
+</table>
 </form>

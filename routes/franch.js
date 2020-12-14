@@ -2,10 +2,10 @@ module.exports = function FranchRoutes(franchService) {
 	
 	async function show(req, res, next) {
 		try {
-			let provinces = await franchService.all();
+			let franch = await franchService.all();
 			res.render('franch/home', {
-				no_franchises: provinces === 0,
-				provinces,
+				no_franch: franch === 0,
+				franch,
 			});
 		}
 		catch (err) {

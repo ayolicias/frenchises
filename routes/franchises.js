@@ -18,7 +18,7 @@ module.exports = function(franchiseService, franchService) {
 	async function showAdd(req, res, next) {
 		try {
 			let franch = await franchService.all();
-			res.render('franchises/home', {
+			res.render('franchises/add', {
 				franch: franch,
 			});
 		}
@@ -61,7 +61,7 @@ module.exports = function(franchiseService, franchService) {
 				return franch;
 			});
 
-			res.render('franchises/home', {
+			res.render('franchises/get', {
 				franchises: franchises,
 				data: franchises
 			});
@@ -84,12 +84,14 @@ module.exports = function(franchiseService, franchService) {
 					status: req.body.status,
 			});
 			req.flash('info', 'Franchises updated!')
-			res.redirect('/franchises/update');
+			res.redirect('/franchises/add');
 		}
 		catch(err){
 			next(err.stack);
 		}
 	};
+
+
 	async function deleteFranchises (req, res, next) {
 		try{
 			var id = req.params.id;
@@ -110,9 +112,6 @@ module.exports = function(franchiseService, franchService) {
 		get,
 		delete : deleteFranchises,
 		update,
-		
-		
-		
-		
+				
 	}
 }
