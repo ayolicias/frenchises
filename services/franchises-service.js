@@ -1,4 +1,4 @@
-module.exports = function ClientService(pool){
+module.exports = function FranchiseService(pool){
     async function all(){
         const query = (`select * from client`);
         let results = await pool.query(query);
@@ -16,14 +16,13 @@ module.exports = function ClientService(pool){
             client.cell,
             client.status,
             client.id
-
         ];
         return pool.query(`insert into client (client_id,contact_details,branch,address,email_address,postal_code,business_tell,cell,status)values ($1, $2, $3,$4, $5, $6,$7, $8,$9)`, data);
     }
     async function get(id){
-        let clientResult = await pool.query('SELECT * FROM client', [id]);
-        let client = clientResult.rows[0];
-        return client;
+        let franchiseResult = await pool.query('SELECT * FROM client', [id]);
+        let franchise = franchiseResult.rows[0];
+       return franchise;
 
     }
     async function sort(id){
@@ -58,7 +57,6 @@ module.exports = function ClientService(pool){
                 cell = $9,
                 status = $10, 
 
-                
             WHERE id = $10`;
 
         return pool.query(updateQuery, data);

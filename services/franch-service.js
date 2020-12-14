@@ -1,15 +1,15 @@
-module.exports = function ProvinceService(pool){
+module.exports = function franchService(pool){
     async function all(){
         let provinces = await pool.query('SELECT * from provinces');
         return provinces.rows;
     }
-    async function add(contact_details){
+    async function add(province_name){
         let data = [
-            contact_details
+            province_name
         ];
-        let results = await pool.query(`insert into provinces (contact_details)  
+        let results = await pool.query(`insert into provinces (province_name)  
             values ($1)
-            returning id, contact_details`, data);
+            returning id, province_name`, data);
         return results.rows[0]
     }
 

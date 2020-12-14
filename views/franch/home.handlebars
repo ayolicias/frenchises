@@ -1,0 +1,16 @@
+<h1>franchises</h1>
+
+<a href="/franch/add">Add</a>
+
+{{#franch}}
+  <h2>{{contact_details}}</h2>
+  <a href="/franch/update/{{id}}">Update</a>
+    <a href="/franch/delete/{{id}}">delete</a>
+
+  
+
+{{/franch}}
+
+{{#no_franchises}}
+  <p>edit franchises above.</p>
+{{/no_franchises}}

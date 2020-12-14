@@ -3,20 +3,17 @@
 const express = require('express');
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
-const Provinces = require('./routes/clients');
-const ProvinceAPI = require('./api/province-api');
-const Clients = require('./routes/province');
-const ClientAPI = require('./api/client-api');
+const Franch = require('./routes/franch');
+const FranchAPI = require('./api/franch-api');
+const Franchises = require('./routes/franchises');
+const FranchisesAPI = require('./api/franchises-api');
 
 const app = express();
 const session = require('express-session');
 const flash = require('express-flash');
-const ProvinceService = require('./services/province-service');
-const ClientService = require('./services/client-servince');
-
-const pg = require('pg');
-const provinceApi = require('./api/province-api');
-const province = require('./routes/franch');
+const FranchService = require('./services/franch-service');
+const FranchiseService = require('./services/franchises-service');
+const pg = require("pg");
 const Pool = pg.Pool;
 
 // should we use a SSL connection
@@ -33,12 +30,12 @@ const pool = new Pool({
     ssl : useSSL
   });
 
-const provinceService = ProvinceService(pool);
-const clientService = ClientService(pool);
-const provinceRoutes = Provinces(provinceService);
-const provinceAPI = ProvinceAPI(provinceService);
-const clientRoutes = Clients(clientService, provinceService);
-const clientAPI = ClientAPI(clientService);
+const franchService = FranchService(pool);
+const franchiseService = FranchiseService(pool);
+const franchRoutes = Franch(franchService);
+const franchAPI = FranchAPI(franchService);
+const franchisesRoutes = Franchises(franchiseService, franchService);
+const franchisesAPI = FranchisesAPI(franchiseService);
 
 app.use(session({
   secret: 'keyboard cat',
@@ -67,61 +64,47 @@ function errorHandler(err, req, res, next) {
 }
 
 //setup the handlers
-app.get('/provinces', provinceRoutes.show);
-app.get('/provinces/add', provinceRoutes.showAdd);
-app.get('/provinces/edit/:id', provinceRoutes.get);
-app.get('/provinces/home', provinceRoutes.showAdd);
-app.get('/provinces/update/1', provinceRoutes.update);
+app.get('/franch', franchRoutes.show);
+app.get('/franch/add', franchRoutes.showAdd);
+app.get('/franch/edit/:id', franchRoutes.get);
+app.get('/franch/home', franchRoutes.showAdd);
+app.get('/franch/update/1', franchRoutes.update);
 
-// app.get('/provinces/home', provinceRoutes.showAdd);
-// app.get('/provinces/home', provinceRoutes.showAdd);
+// app.get('/franchises/home', franchiseRoutes.showAdd);
+// app.get('/franchises/home', franchiseRoutes.showAdd);
 
-app.post('/provinces/home', provinceRoutes.sortRecords);
-app.post('/province/update', provinceRoutes.update);
-app.post('/provinces/add', provinceRoutes.add);
-app.post('/province/add', provinceRoutes.add);
-app.post('/province/home', provinceRoutes.sorts);
-
-//delete
-app.get('/province/delete', provinceRoutes.delete);
-
-app.get('/', clientRoutes.show);
-app.get('/clients', clientRoutes.show);
-app.get('/client/edit', clientRoutes.showAdd);
-
-app.get('/client/update', clientRoutes.showAdd);
-app.get('/client/add', clientRoutes.showAdd);
-app.get('/client/home', clientRoutes.showAdd),
-app.get('/client/home', clientRoutes.sortRecords),
-
-// app.post('/client/home', clientRoutes.sortRecords),
-app.post('/client/home', clientRoutes.sorts),
-app.post('/client/add', clientRoutes.add);
-app.post('/client/update', clientRoutes.update);
+app.post('/franch/home', franchRoutes.sortRecords);
+app.post('/franch/update', franchRoutes.update);
+app.post('/franch/add', franchRoutes.add);
+app.post('/franch/home', franchRoutes.sorts);
 
 //delete
-app.get('/client/delete/:id', clientRoutes.delete);
+app.get('/franch/delete', franchRoutes.delete);
 
-app.get('/api/client', clientAPI.all);
-app.post('/api/client', clientAPI.add);
+app.get('/franchises', franchisesRoutes.show);
+app.get('/franchises/home', franchisesRoutes.showAdd);
 
-app.get('/api/province', provinceAPI.all);
+app.get('/franchises/update', franchisesRoutes.showAdd);
+app.get('/franchises/home', franchisesRoutes.showAdd);
+app.get('/franchises/home', franchisesRoutes.showAdd),
+
+app.post('/franchises/add', franchisesRoutes.add);
+app.post('/franchises/update', franchisesRoutes.update);
+app.post('/franchises/home', franchisesRoutes.show);
+app.post('/franchises/home', franchisesRoutes.showAdd);
+
+//delete
+app.get('/franchises/delete/:id', franchisesRoutes.delete);
+
+app.get('/api/franchises', franchisesAPI.all);
+app.post('/api/franchises', franchisesAPI.add);
+
+app.post('/api/franchises', franchisesAPI.add);
+
+
+app.get('/api/franch', franchAPI.all);
 
 app.use(errorHandler);
-
-// // configure the port number using and environment number
-// var portNumber = process.env.PORT || 3000;
-
-// //start everything up
-
-// app.listen(portNumber, function () {
-//   console.log('Create, Read, Update, and Delete (clients) server listening on:', portNumber);
-// });
-
-// let PORT = process.env.PORT || 3000;
-// app.listen(PORT, function () {
-// console.log("App started on Port", PORT);
-// }); 
 
 app.set('port', (process.env.PORT || 3000));
 app.listen(app.get('port'), function() {

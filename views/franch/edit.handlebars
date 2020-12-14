@@ -1,48 +1,41 @@
 <h1>update Franchises</h1>
 
-<form action="/clients/edit/{{data.id}}" method="POST">
-	<div class="">
-		<label for="">Provinces</label>
+<form action="/franch/update/{{data.id}}" method="POST">
 
-	
-		<select class="" name="province_id">
-			{{#provinces}}
-				<option {{selected}} value="{{id}}">{{province_name}}</option>
-			{{/provinces}}
-		</select>
-	</div>
 	<div class="">
 		<label for="">province_name</label>
-		<input type="text" name="contact_details" value="{{data.province_name}}">
+		<input type="text" name="province_name" value="{{data.province_name}}">
 	</div>
-		<div class="">
+
+	<div class="">
 		<label for="">contact_details</label>
 		<input type="text" name="contact_details" value="{{data.contact_details}}">
 	</div>
-	<div class="field">
+	<div class="">
 		<label for="">branch</label>
 		<input type="text" name="branch" value="{{data.branch}}">
 	</div>
-    <div class="field">
+	<div class="">
 		<label for="">email_address</label>
 		<input type="text" name="email_address" value="{{data.email_address}}">
 	</div>
-    <div class="field">
+	<div class="">
 		<label for="">postal_code</label>
 		<input type="text" name="postal_code" value="{{data.postal_code}}">
 	</div>
-      <div class="field">
+	<div class="">
 		<label for="">business_tell</label>
 		<input type="text" name="business_tell" value="{{data.business_tell}}">
 	</div>
-    	</div>
-      <div class="field">
+	<div class="">
 		<label for="">cell</label>
 		<input type="text" name="cell" value="{{data.cell}}">
 	</div>
-     <div class="field">
+	<div class="">
 		<label for="">status</label>
 		<input type="text" name="status" value="{{data.status}}">
 	</div>
-	</div>
-	</form>
+
+	<input type="submit">
+
+</form>

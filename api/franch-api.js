@@ -1,11 +1,13 @@
-module.exports = function (franchiseService) {
+// const franchService = require("../services/franch-service");
+
+module.exports = function (franchService) {
 	
 	async function all(req, res) {
 		try {
-			let franchises = await franchiseService.all();
+			let franch = await franchService.all();
 			res.json({
 				status: 'success',
-				data: franchises
+				data: franch
 			});
 		}
 		catch (err) {
@@ -19,7 +21,7 @@ module.exports = function (franchiseService) {
 	async function add(req, res) {
 		try {
 			let input = req.body;
-			await franchiseService.add(input);
+			await franchService.add(input);
 			res.json({
 				status: 'success',
 				data: franchises
@@ -36,7 +38,7 @@ module.exports = function (franchiseService) {
 	async function get(req, res) {
 		try {
 			var id = req.params.id;
-			let result = await franchiseService.get(id);
+			let result = await franchService.get(id);
 			res.json({
 				status: 'success',
 				data: result.rows[0]
@@ -55,11 +57,11 @@ module.exports = function (franchiseService) {
 		try {
 			const data = req.body;
 			const id = req.params.id;
-			const result = data.result;
+			const province_name = data.province_name;
 
-			await franchiseService.update({
+			await provinceService.update({
 				id,
-				details
+				province_name
 			})
 			res.json({
 				status: 'success'
@@ -77,7 +79,7 @@ module.exports = function (franchiseService) {
 	async function deleteOne(req, res) {
 		try{
 			const id = req.params.id;
-			await franchiseService.delete(id);
+			await franchService.delete(id);
 			res.json({
 				status: 'success'
 			});

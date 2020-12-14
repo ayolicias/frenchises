@@ -1,8 +1,8 @@
 <h1>Franchises</h1>
 <div>
-    <a href="/client/update">Update</a>
-    <a href="/client/add">Add</a>
-    <a href="/client/delete/{{id}}">Delete</a> 
+    <a href="/franchises/update">Update</a>
+    <a href="/franchises/add">Add</a>
+    <a href="/franchises/delete/{{id}}">Delete</a> 
 
   <div class="row select"id="filt">
     <div class="col-md-12">
@@ -24,9 +24,9 @@
   
   <div class="row">
     <div class="displayStatus">
-        {{#each clients}}
+        {{#each franchises}}
          <div class="display">
-          {{client}}
+          {{franchises}}
           </div>
         {{/each}}
     </div>
@@ -85,5 +85,5 @@
 </table>
 
 {{#no_client}}
-<p>add clients above.</p>
+<p>add franchise above.</p>
 {{/no_client}}

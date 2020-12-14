@@ -1,10 +1,10 @@
-module.exports = function ProvinceRoutes(provinceService) {
+module.exports = function FranchRoutes(franchService) {
 	
 	async function show(req, res, next) {
 		try {
-			let provinces = await provinceService.all();
-			res.render('province/home', {
-				no_client: provinces === 0,
+			let provinces = await franchService.all();
+			res.render('franch/home', {
+				no_franchises: provinces === 0,
 				provinces,
 			});
 		}
@@ -14,27 +14,27 @@ module.exports = function ProvinceRoutes(provinceService) {
 	};
 
 	function showAdd(req, res, next) {
-		res.render('province/add');
+		res.render('franch/home');
 	}
 
 	async function add(req, res, next) {
-		const {contact_details} = req.body;
+		const {province_name} = req.body;
 		try {
 			
-			if (!contact_details) {
+			if (!province_name) {
 				req.flash('error', 'details is empty!');
-				return res.redirect('/client/add');
+				return res.redirect('/franchises/add');
 			}
 
-			await provinceService.add(contact_details);
+			await frannchService.add(province_name);
 			req.flash('info', 'details added!');
-			res.redirect('/client');
+			res.redirect('/franchises');
 		}
 		catch (err) {
 
 			if (err.stack.includes("duplicate key")){
-				req.flash('error', 'details already exists : ' + contact_details);
-				return res.redirect('/client/add');
+				req.flash('error', 'details already exists : ' + province_name);
+				return res.redirect('/franchises/add');
 			}
 
 			next(err)
@@ -44,8 +44,8 @@ module.exports = function ProvinceRoutes(provinceService) {
 	async function get(req, res, next) {
 		try {
 			var id = req.params.id;
-			let result = await provinceService.get(id); // pool.query('SELECT * FROM categories WHERE id = $1', [id]);
-			res.render('provinces/edit', {
+			let result = await franchService.get(id); // pool.query('SELECT * FROM provinces WHERE id = $1', [id]);
+			res.render('franch/edit', {
 				page_title: "Edit Customers - Node.js",
 				data: result
 			});
@@ -54,21 +54,6 @@ module.exports = function ProvinceRoutes(provinceService) {
 			next(err);
 		}
 	};
-
-	// async function sorts(req, res, next) {
-	// 	try {
-	// 		var status = req.params.status;
-	// 		let sorting = await provinceService.sort(status); // pool.query('SELECT * FROM categories WHERE id = $1', [id]);
-	// 		res.render('provinces/home', {
-	// 			page_title: "Edit Customers - Node.js",
-	// 			data: sorting
-	// 		});
-	// 	}
-	// 	catch (err) {
-	// 		next(err);
-	// 	}
-	// };
-
 	
 	async function sorts(req, res, next) {
 		const {status_type} = req.body;
@@ -76,18 +61,18 @@ module.exports = function ProvinceRoutes(provinceService) {
 			
 			if (!status_type) {
 				req.flash('error', 'status is empty!');
-				return res.redirect('/client/home');
+				return res.redirect('/franchises/home');
 			}
 
-			await provinceService.sort(status_type);
+			await franchService.sort(status_type);
 			req.flash('info', 'status added!');
-			res.redirect('/client');
+			res.redirect('/franchises');
 		}
 		catch (err) {
 
 			if (err.stack.includes("duplicate key")){
 				req.flash('error', 'status already exists : ' + status_type);
-				return res.redirect('/client/home');
+				return res.redirect('/franchises/home');
 			}
 
 			next(err)
@@ -100,14 +85,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 
 			console.log(JSON.stringify(req.headers));
 
-			let data = req.body;
-			let id = req.params.id;
-			let contact_details = req.body.contact_details;
-			let provinces = req.body.provinces
-
 			await provinceService.update({
-				// id,
-				// description
 				province_id:req.body.province_id,
 				province_name :req.body.province_name,
 				contact_details :req.body.contact_details,
@@ -119,7 +97,7 @@ module.exports = function ProvinceRoutes(provinceService) {
 				status: req.body.status,
 			})
 			req.flash('info', 'Franchise updated!');
-			res.redirect('/provinces');
+			res.redirect('/franch');
 		}
 		catch (err) {
 			next(err);
@@ -130,9 +108,9 @@ module.exports = function ProvinceRoutes(provinceService) {
 	async function deleteOne(req, res, next) {
 		var id = req.params.id;
 		try{
-			await provinceService.delete(id);
-			req.flash('info', 'Province deleted!');
-			res.redirect('/province');
+			await franchService.delete(id);
+			req.flash('info', 'franchises deleted!');
+			res.redirect('/franch');
 		}
 		catch(err){
 			next(err);

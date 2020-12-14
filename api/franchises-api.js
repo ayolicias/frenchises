@@ -1,8 +1,8 @@
-module.exports = function(clientService) {
+module.exports = function(franchiseService) {
 	
 	async function all(req, res) {
 		try {
-			let results = await clientService.all(); 
+			let results = await franchiseService.all(); 
 			res.json({
 				status: 'success',
 				data: results
@@ -16,10 +16,16 @@ module.exports = function(clientService) {
 	async function add(req, res) {
 
 		try {
-			await clientService.create({
-				province_id: Text(req.body.province_id),
-				details : req.body.details,
-				cell: Text(req.body.cell)
+			await franchiseService.create({
+				province_id: Number(req.body.province_id),
+				province_name :req.body.province_name,
+				contact_details :req.body.contact_details,
+				branch:req.body.branch,
+				email_address:req.body.email_address,
+				postal_code: req.body.postal_code,
+				business_tell: req.body.busines_tell,
+				cell: req.body.cell,
+				status: req.body.status,	
 			});
 			
 			res.json({
@@ -37,7 +43,7 @@ module.exports = function(clientService) {
 	async function get(req, res) {
 		try {
 			let id = req.params.id;
-			let client = await clientService.get(id);
+			let franchise = await franchiseService.get(id);
 			res.json({
 				status: "success",
 				data: client
@@ -53,11 +59,16 @@ module.exports = function(clientService) {
 
 	async function update(req, res, next) {
 		try{
-			await clientService.update({
-				province_id: Text(req.body.province_id),
-				details: req.body.details,
-				cell: Text(req.body.cell),
-				id: req.params.id
+			await franchiseService.update({
+				province_id: Number(req.body.province_id),
+				province_name :req.body.province_name,
+				contact_details :req.body.contact_details,
+				branch:req.body.branch,
+				email_address:req.body.email_address,
+				postal_code: req.body.postal_code,
+				business_tell: req.body.busines_tell,
+				cell: req.body.cell,
+				status: req.body.status,	
 			});
 			res.json({
 				status: "success"

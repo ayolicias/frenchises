@@ -12,6 +12,7 @@
     <script type="text/x-template" class="productListTemplate">
         <table>
         <tr>
+            <th>province_name</th>
             <th>contact_details</th>
             <th>branch</th>
             <th>ADDRESS</th>
@@ -39,9 +40,9 @@
     </script>
 
     <script type="text/x-template" class="clientsListTemplate">
-        <option value="">Select client</option>
+        <option value="">Select franchises</option>
         {{#each categoryList}}
-        <option value="{{id}}">{{contact_details}}</option> 
+        <option value="{{id}}">{{province_name}}</option> 
         {{/each}}
     </script>
 
@@ -56,12 +57,12 @@
 </head>
 <body>
     <div id="container">
-            <h1>client via API</h1>
+            <h1>franchises via API</h1>
             
-            <div class="client">
+            <div class="franchises">
             </div>
             <div>
-                <h1>Add client</h1>
+                <h1>Add franchises</h1>
                 <div class="errors">
                 </div>
                 <div>
@@ -113,5 +114,5 @@
             </div>
     </div>
 </body>
-<script src="clients.js"></script>
+<script src="franchise.js"></script>
 </html>
