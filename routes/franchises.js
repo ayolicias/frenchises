@@ -6,7 +6,7 @@ module.exports = function(franchiseService, franchService) {
 		try {
 			let results = await franchiseService.all(); 
 			res.render('franchises/home', {
-				no_franchises: results.length === 0,
+				no_client: results.length === 0,
 				franchises: results,
 			});
 		}
@@ -42,7 +42,7 @@ module.exports = function(franchiseService, franchService) {
 			});
 			
 			req.flash('info','franchise Added!')
-			res.redirect('/franchises/add');
+			res.redirect('franchises/home');
 		}
 		catch (err) {
 			next(err);
@@ -61,7 +61,7 @@ module.exports = function(franchiseService, franchService) {
 				return franch;
 			});
 
-			res.render('franchises/get', {
+			res.render('franchises/home', {
 				franchises: franchises,
 				data: franchises
 			});
@@ -84,12 +84,23 @@ module.exports = function(franchiseService, franchService) {
 					status: req.body.status,
 			});
 			req.flash('info', 'Franchises updated!')
-			res.redirect('/franchises/add');
+			res.redirect('/franchises/home');
 		}
 		catch(err){
 			next(err.stack);
 		}
 	};
+
+async function sortRecords(req, res) {
+    try{
+        await franchiseService.clear();
+        res.redirect('/');
+
+    } catch (err) {
+        res.send(err.stack)
+    }
+}
+	
 
 
 	async function deleteFranchises (req, res, next) {
@@ -111,7 +122,7 @@ module.exports = function(franchiseService, franchService) {
 		add,
 		get,
 		delete : deleteFranchises,
-		update,
-				
+		update,	
+		sortRecords
 	}
 }

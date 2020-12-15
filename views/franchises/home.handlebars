@@ -48,9 +48,9 @@
     <th>Postal Code</th>
     <th>Business Tell</th>
     <th>Cell</th>
-    <th></th>
+    <th>status</th>
   </tr>
-  {{#client}}
+  {{#franchises}}
   <tr>
     <td>
       {{province_name}}
@@ -77,12 +77,16 @@
     </td>
     <td>
       {{cell}}
+      </td>
+    <td>
+    {{status}}
     </td>
+    
      
-    {{/client}}
+    {{/franchises}}
   </tr>
 </table>
 
-{{#no_client}}
+{{#no_franchises}}
 <p>add franchise above.</p>
-{{/no_client}}
+{{/no_franchises}}

@@ -70,33 +70,28 @@ app.get('/franch/edit/:id', franchRoutes.get);
 app.get('/franch/home', franchRoutes.showAdd);
 app.get('/franch/update/1', franchRoutes.update);
 
-// app.get('/franchises/home', franchiseRoutes.showAdd);
-// app.get('/franchises/home', franchiseRoutes.showAdd);
-
 app.post('/franch/home', franchRoutes.show);
 app.post('/franch/update', franchRoutes.update);
 app.post('/franch/add', franchRoutes.add);
 app.post('/franch/home', franchRoutes.showAdd);
 
-//delete
-app.get('/franch/delete', franchRoutes.delete);
+app.post('/franchises', franchisesRoutes.show);
+app.post('/franchises/home', franchisesRoutes.show);
+app.post('/franchises/get', franchisesRoutes.get);
+app.post('/franchises/add', franchisesRoutes.add);
+app.post('/franchises/home', franchisesRoutes.showAdd);
+app.post('/franchises/update', franchisesRoutes.update);
 
 app.get('/franchises', franchisesRoutes.show);
+app.get('/franchises/home', franchisesRoutes.show);
+app.get('/franchises/get', franchisesRoutes.get);
+app.get('/franchises/add', franchisesRoutes.add);
 app.get('/franchises/home', franchisesRoutes.showAdd);
-
-app.get('/franchises/update', franchisesRoutes.showAdd);
-app.get('/franchises/home', franchisesRoutes.showAdd);
-app.get('/franchises/add', franchisesRoutes.add),
-
-app.post('/franchises/add', franchisesRoutes.add);
-app.post('/franchises/update', franchisesRoutes.update);
-app.post('/franchises/home', franchisesRoutes.show);
-app.post('/franchises/home', franchisesRoutes.showAdd);
-app.post('/franchises/add', franchisesRoutes.showAdd);
-app.post('/franchises/add', franchisesRoutes.show);
+app.get('/franchises/update', franchisesRoutes.update);
 
 //delete
-app.get('/franchises/delete/:id', franchisesRoutes.delete);
+app.get('/franch/delete/:id', franchRoutes.delete);
+app.get('/franchises/delete/:id', franchisesRoutes.delete)
 
 app.get('/api/franchises', franchisesAPI.all);
 app.post('/api/franchises', franchisesAPI.add);

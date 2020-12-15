@@ -102,7 +102,6 @@ module.exports = function FranchRoutes(franchService) {
 		catch (err) {
 			next(err);
 		}
-
 	};
 
 	async function deleteOne(req, res, next) {
@@ -110,16 +109,36 @@ module.exports = function FranchRoutes(franchService) {
 		try{
 			await franchService.delete(id);
 			req.flash('info', 'franchises deleted!');
-			res.redirect('/franch');
+			res.redirect('/franch/home');
 		}
 		catch(err){
 			next(err);
 		}
 	};
-	async function sortRecords() {
-        let remove = await pool.query('DELETE FROM client');
-        return remove.rows;
-    }
+	async function sortDetails(req, res, next) {
+
+		try {
+
+			console.log(JSON.stringify(req.headers));
+
+			await provinceService.sortDetails({
+				province_id:req.body.province_id,
+				province_name :req.body.province_name,
+				contact_details :req.body.contact_details,
+				branch:req.body.branch,
+				email_address:req.body.email_address,
+				postal_code: req.body.postal_code,
+				business_tell: req.body.busines_tell,
+				cell: req.body.cell,
+				status: req.body.status,
+			})
+			req.flash('info', 'Franchise updated!');
+			res.redirect('/franch');
+		}
+		catch (err) {
+			next(err);
+		}
+	};
 
 	return {
 		add,
@@ -129,6 +148,6 @@ module.exports = function FranchRoutes(franchService) {
 		showAdd,
 		show,
 		sorts,
-		sortRecords
+		sortDetails
 	}
 }

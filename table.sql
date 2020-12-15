@@ -1,5 +1,5 @@
 
-create table provinces(
+create table franchises(
     id serial not null primary key,
     province_name varchar(100)not null,
     contact_details text not null,
@@ -12,7 +12,7 @@ create table provinces(
     status text not null
 );
     
-create table client(
+create table franch(
 	id serial not null primary key,
     province_name varchar(100)not null,
     contact_details text not null,
@@ -23,8 +23,8 @@ create table client(
     business_tell text not null,
     cell text not null,
     status text not null,
-	province_id int,
-	foreign key (province_id) references provinces(id)
+	franch_id int,
+	foreign key (franch_id) references franch(id)
 );
 
 alter table provinces add constraint uniq_desc_constraint unique(contact_details);
